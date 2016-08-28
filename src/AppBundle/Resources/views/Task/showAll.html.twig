@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Task list</h1>
+    <p><a href="{{ path('app_task_create') }}">Add new task</a> </p>
+    <h2>Tasks to do..</h2>
+    {{ include('AppBundle:Task:_taskList.html.twig', {'tasks': notCompleted}) }}
+    <h2>Tasks already done</h2>
+    {{ include('AppBundle:Task:_taskList.html.twig', {'tasks': completed}) }}
+
+{% endblock %}

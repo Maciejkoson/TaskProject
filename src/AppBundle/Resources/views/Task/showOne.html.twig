@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+   <p>Name: {{ task.name }}</p>
+   <p>Description: {{ task.description }}</p>
+   <p>Due: {{ task.due|date() }}</p>
+   <p>Comments
+   <p>{% for comments in task.comments %}
+         <li>{{ comments.text }}
+            {% if task.comments|length > 0 %}
+   <a href="{{ path('app_comment_deletecomment', {'commentId': comments.id}) }}">Delete this comment</a>
+      {% endif %}
+      </li>
+      {% endfor %}
+   </p>
+   <th>Comments number:
+   {{ task.comments|length }}
+   <p><a href="{{ path('app_task_showall') }}">Back to the task list</a></p>
+   <p><a href="{{ path('app_task_addcomment',{ 'taskId': task.id}) }}">Add comment here</a></p>
+{% endblock %}
+

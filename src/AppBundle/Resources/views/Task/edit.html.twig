@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Task edit</h1>
+    {{ form(form) }}
+
+    <p><a href="{{ path('app_task_showall') }}">Back to the task list</a></p>
+    {% if task.comments|length == 0 %}
+
+        <p><a href="{{ path('app_task_delete', { 'taskId': task.id }) }}">Delete task</a></p>
+
+        {% else %}
+
+        {% endif %}
+{% endblock %}

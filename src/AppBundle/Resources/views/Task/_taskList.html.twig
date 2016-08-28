@@ -1,0 +1,47 @@
+<table class="records_list">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Due</th>
+        <th>Comments number</th>
+        <th>Category</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for task in tasks %}
+        <tr>
+            <td><a href="{{ path('app_task_showall', { 'taskId': task.id }) }}">{{ task.id }}</a></td>
+            <td>{{ task.name }}</td>
+            <td>{{ task.description }}</td>
+            <td>{% if task.due %}{{ task.due|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{{ task.comments.count }}</td>
+            <td>{{ task.taskCategory }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('app_task_showone', { 'taskId': task.id }) }}">Show task</a>
+                    </li>
+                    <li>
+                        {% if not task.completed %}
+                        <a href="{{ path('app_task_edit', { 'taskId': task.id }) }}">Edit task</a>
+                        {% endif %}
+                    </li>
+                    {% if not task.completed %}
+                        <li>
+                            <a href="{{ path('app_task_completed', {'taskId': task.id}) }}">Make it complete</a>
+                        <li>
+                            <a href="{{ path('app_taskcategory_createcategoryactoion', {'taskId': task.id}) }}">Add category</a>
+                        </li>
+                        </li>
+
+                    {% endif %}
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
